@@ -50,9 +50,11 @@ public class ShellController extends BaseController implements Button.ClickListe
 
     List<ModuleTag> moduleTags;
 
+    Application app;
     public ShellController(Application app){
 
         this("MainShellUI.xml");
+        this.app =app;
         fileLocation = app.getContext().getBaseDirectory().getAbsolutePath()+"/scripts/Modules.xml";
         moduleMetaProcessor=new ModuleMetaProcessor(fileLocation);
         initLayout();
@@ -101,7 +103,15 @@ public class ShellController extends BaseController implements Button.ClickListe
         b.addStyleName("borderless");
         right.addComponent(b);
 
-        b = new Button("Action 2");
+        b = new Button("Settings..");
+
+        b.addListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+               app.getMainWindow().addWindow(new ConfigWindow());
+            }
+        });
+
         b.setIcon(new ThemeResource("../runo/icons/16/document.png"));
         b.addStyleName("borderless");
         right.addComponent(b);
