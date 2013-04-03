@@ -9,7 +9,7 @@ import com.vaadin.ui.Component;
 
 /**
  * Indicates that a field decorated with this annotation should be assigned a
- * {@link com.vaadin.ui.Component} instance from the created component hierarchy.
+ * {@link Component} instance from the created component hierarchy.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

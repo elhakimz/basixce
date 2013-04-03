@@ -15,8 +15,8 @@ import com.vaadin.ui.Button.ClickEvent;
  * <br />
  * <br />
  * The type of events that the method will be invoked on is derived from the
- * parameter type. For example a method with {@link com.vaadin.ui.Button.ClickEvent} parameter can
- * act as a click listener for a {@link com.vaadin.ui.Button}.
+ * parameter type. For example a method with {@link ClickEvent} parameter can
+ * act as a click listener for a {@link Button}.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

@@ -16,7 +16,7 @@ import com.vaadin.data.Property;
  * <br />
  * <br />
  * This means that the return value must implement one of the Vaadin data model
- * interfaces ({@link com.vaadin.data.Property}, {@link com.vaadin.data.Item} or {@link com.vaadin.data.Container}).
+ * interfaces ({@link Property}, {@link Item} or {@link Container}).
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

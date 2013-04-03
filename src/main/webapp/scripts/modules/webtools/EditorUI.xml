@@ -3,7 +3,7 @@
     <CssLayout styleName="toolbar small" width="100%">
         <NativeButton id="btnNew" caption="New" styleName="small"/>
         <NativeButton id="btnSave" caption="Save" styleName="small"/>
-        <NativeButton id="btnRefresh" caption="Refresh" styleName="small"/>
+        <NativeButton id="btnRun" caption="Run" styleName="small"/>
     </CssLayout>
     <HorizontalSplitPanel id="split" sizeFull="" height="550px" l:expandRatio="1.0">
 

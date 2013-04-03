@@ -1,9 +1,8 @@
-import com.vaadin.ui.TabSheet
-import com.vaadin.ui.VerticalSplitPanel
+import com.vaadin.ui.*
 import org.basix.common.BaseController
-import org.vaadin.aceeditor.AceSuggestibleEditor
-import org.vaadin.aceeditor.gwt.ace.AceMode
+import org.basix.ui.comp.AceSqlEditor
 import org.vaadin.teemu.clara.binder.annotation.UiField
+import org.vaadin.teemu.clara.binder.annotation.UiHandler
 
 /**
  * User: abilhakim
@@ -23,7 +22,10 @@ class QueryConsoleController extends BaseController{
     @UiField("split")
     private VerticalSplitPanel split;
 
-    private AceSuggestibleEditor editor=new AceSuggestibleEditor()
+    @UiField("btnRun")
+    private NativeButton btnRun
+
+    private AceSqlEditor editor=new AceSqlEditor()
     private TabSheet tabSheet=new TabSheet()
 
     QueryConsoleController(String xmlView) {
@@ -33,15 +35,26 @@ class QueryConsoleController extends BaseController{
 
     void initLayout(){
         editor.setSizeFull()
-        editor.setMode(AceMode.sql)
+
         editor.setValue("/* Enter Query Here */\r\n SELECT * FROM DUAL")
         split.firstComponent=editor
         split.setSecondComponent(tabSheet)
 
     }
 
-    void run(){
+   @UiHandler("btnRun")
+    void runQuery(Button.ClickEvent event){
+        Table table = new Table()
+        table.caption="Result"
+        table.setSizeFull()
+        tabSheet.addTab(table).closable =true
+    }
+
+
+    void processSql(String sql){
 
     }
+
+
 
 }
