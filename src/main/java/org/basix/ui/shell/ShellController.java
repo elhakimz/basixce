@@ -1,5 +1,6 @@
 package org.basix.ui.shell;
 
+import com.AppFacade;
 import com.vaadin.Application;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.*;
@@ -51,21 +52,26 @@ public class ShellController extends BaseController implements Button.ClickListe
     List<ModuleTag> moduleTags;
 
     Application app;
-    public ShellController(Application app){
+
+    public ShellController(){
 
         this("MainShellUI.xml");
-        this.app =app;
-        fileLocation = app.getContext().getBaseDirectory().getAbsolutePath()+"/scripts/Modules.xml";
-        moduleMetaProcessor=new ModuleMetaProcessor(fileLocation);
-        initLayout();
+
+
     }
 
     public ShellController(String xmlView) {
         super(xmlView);
     }
 
-    public void initLayout(){
+    public void initModules(){
+        app=AppFacade.getInstance().getApplication();
+        fileLocation = AppFacade.getInstance().getBaseDirectory()+"/scripts/Modules.xml";
+        moduleMetaProcessor=new ModuleMetaProcessor(fileLocation);
+    }
 
+    public void initLayout(){
+        System.out.println("Initializing MainShellUI Layout");
         toolbar.setWidth("100%");
         toolbar.addStyleName("toolbar-invert");
 
@@ -90,6 +96,12 @@ public class ShellController extends BaseController implements Button.ClickListe
 
         moduleTags = moduleMetaProcessor.getModuleTags();
         for(ModuleTag tag:moduleTags){
+            String role=tag.getRole();
+            if(role==null){
+
+                continue;
+            }
+
             Button b = new NativeButton(tag.getCaption());
             b.setData(tag.getPack());
             b.addListener(moduleClick);
@@ -123,9 +135,6 @@ public class ShellController extends BaseController implements Button.ClickListe
         splitPanel.setSplitPosition(20);
 
         populateMenu(null);
-
-
-
     }
 
 
@@ -179,16 +188,13 @@ public class ShellController extends BaseController implements Button.ClickListe
 
         ModuleTag moduleTag=null;
 
-        if(packageName==null){
-             moduleTag = moduleTags.get(0);
-        }else {
-            for(ModuleTag tag:moduleTags){
-                if(tag.getPack().equals(packageName)){
-                    moduleTag = tag;
-                    break;
-                }
-            }
-        }
+
+             for(ModuleTag tag:moduleTags){
+                 if(tag.getRole()!=null && tag.getRole().equals("ADMIN")){
+                    moduleTag=tag;
+                 }
+             }
+
 
         if(moduleTag==null) return;
 

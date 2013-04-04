@@ -13,6 +13,7 @@ public class BaseController extends AbstractController {
     private String xmlView;
     protected Component view;
 
+
     public BaseController(final String xmlView){
       this.xmlView = xmlView;
       this.view =Clara.create(xmlView,this);
@@ -22,4 +23,13 @@ public class BaseController extends AbstractController {
     public Component getView() {
         return view;
     }
+
+    public void initModules(){
+
+    }
+
+    public void initLayout(){
+
+    }
+
 }

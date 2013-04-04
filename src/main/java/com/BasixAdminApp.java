@@ -5,62 +5,75 @@ import com.vaadin.service.ApplicationContext;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Window;
-import org.basix.common.BaseController;
-import org.basix.ui.shell.AppShellController;
+import org.basix.common.pattern.ICommand;
+import org.basix.ui.shell.LoginWindow;
+import org.basix.ui.shell.ShellController;
+
+import java.util.Map;
 
 /**
  * User: abilhakim
- * Date: 3/30/13
- * Time: 4:12 AM
+ * Date: 4/3/13
+ * Time: 6:16 PM
  */
-public class BasixApp extends Application implements ApplicationContext.TransactionListener  {
-
-    private static ThreadLocal<BasixApp> currentApp = new ThreadLocal<BasixApp>();
-
+public class BasixAdminApp  extends Application implements ApplicationContext.TransactionListener {
+    private static ThreadLocal<BasixAdminApp> currentApp = new ThreadLocal<BasixAdminApp>();
     private Window mainWindow;
 
 
-    private static final String FNAME = "First Name";
-    private static final String LNAME = "Last Name";
-    private static final String COMPANY = "Company";
-    private static final String[] fieldNames = new String[] { FNAME, LNAME,
-            COMPANY, "Mobile Phone", "Work Phone", "Home Phone", "Work Email",
-            "Home Email", "Street", "City", "Zip", "State", "Country" };
+    private ShellController shellController;
+    private boolean initialized=false;
+    private boolean  isLogin;
 
+    private LoginWindow loginWindow = new LoginWindow();
 
-
-    private BaseController shellController;
-
-    private BasixApp thisApp;
-
-    private boolean initialized;
-
+    /**
+     * <p>
+     * Main initializer of the application. The <code>init</code> method is
+     * called by the framework when the application is started, and it should
+     * perform whatever initialization operations the application needs, such as
+     * creating windows and adding components to them.
+     * </p>
+     */
     @Override
     public void init() {
-
-        thisApp=this;
-
-        setTheme("runo");
-        shellController = new AppShellController();
+        setTheme("reindeermods");
+        shellController = new ShellController();
         Component c = shellController.getView();
         c.setSizeFull();
 
         mainWindow = new Window("Vaadin Application", (ComponentContainer) c);
         mainWindow.setSizeFull();
-
         setMainWindow(mainWindow);
+
         AppFacade.getInstance().setApplication(this);
         shellController.initModules();
         shellController.initLayout();
 
+
+        loginWindow.setOnLogin(new ICommand() {
+            @Override
+            public void execute(Map executeParameter) {
+
+              mainWindow.removeWindow(loginWindow);
+
+            }
+        });
+
+        mainWindow.addWindow(loginWindow);
+
+
     }
+
+
 
     private void doInitialize(){
-        if(initialized) return;
+       if(initialized) return;
 
-
-        initialized=true;
+       initialized=true;
     }
+
+
 
     /**
      * Invoked at the beginning of every transaction.
@@ -75,7 +88,7 @@ public class BasixApp extends Application implements ApplicationContext.Transact
      */
     @Override
     public void transactionStart(Application application, Object transactionData) {
-        if ( application == BasixApp.this )
+        if ( application == BasixAdminApp.this )
         {
             currentApp.set ( this );
             doInitialize();
@@ -96,14 +109,15 @@ public class BasixApp extends Application implements ApplicationContext.Transact
      */
     @Override
     public void transactionEnd(Application application, Object transactionData) {
-        if ( application == BasixApp.this )
+
+        if ( application == BasixAdminApp.this )
         {
             currentApp.set ( null );
             currentApp.remove ();
         }
     }
 
-    public static BasixApp getInstance()
+    public static BasixAdminApp getInstance()
     {
         return currentApp.get();
     }

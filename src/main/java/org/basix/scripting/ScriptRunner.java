@@ -1,6 +1,6 @@
 package org.basix.scripting;
 
-import com.BasixApp;
+import com.AppFacade;
 import groovy.lang.Binding;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
@@ -29,6 +29,8 @@ public class ScriptRunner extends AbstractScriptRunner {
 
     private static ScriptRunner __instance;
 
+
+
     public static ScriptRunner getInstance(){
      if(__instance==null) __instance = new ScriptRunner();
      return __instance;
@@ -36,7 +38,7 @@ public class ScriptRunner extends AbstractScriptRunner {
 
 
     private  ScriptRunner(){
-        scriptDirectory = BasixApp.getBaseDirectory()+"/scripts/";
+        scriptDirectory = AppFacade.getInstance().getBaseDirectory()+"/scripts/";
     }
 
     /**

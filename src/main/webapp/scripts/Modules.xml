@@ -1,5 +1,5 @@
 <data>
-    <module caption="Foundation" package="base">
+    <module caption="Foundation" package="base" >
         <separator caption="This is separator"/>
         <function caption="Base Example" controller="base.Basis"/>
         <function caption="Function 12" controller="12"/>
@@ -10,12 +10,15 @@
         <function caption="Function 23" controller=""/>
 
     </module>
-    <module caption="Web Tools" package="webtools">
+    <module caption="Web Tools" package="webtools" role="ADMIN">
         <separator caption="Development"/>
         <function caption="Script Editor" controller="webtools.Editor"/>
         <function caption="Query Console" controller="webtools.QueryConsole"/>
+        <function caption="Service Registry" controller="webtools.ServiceReg"/>
+        <function caption="Chart Playground" controller="webtools.ChartConsole"/>
+
         <separator caption="Public API"/>
-        <function caption="BlockLy" controller="19"/>
+
         <function caption="Twitter Console" controller="20"/>
         <function caption="Amazon Console" controller="21"/>
         <function caption="SalesForce Console" controller="22"/>

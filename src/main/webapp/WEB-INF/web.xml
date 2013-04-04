@@ -12,7 +12,7 @@
         <param-value>false</param-value>
     </context-param>
     <servlet>
-        <servlet-name>MySampleVaadinApplication</servlet-name>
+        <servlet-name>BasixApplication</servlet-name>
         <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
         <init-param>
             <param-name>application</param-name>
@@ -24,9 +24,31 @@
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MySampleVaadinApplication</servlet-name>
+        <servlet-name>BasixApplication</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>AdminApplication</servlet-name>
+        <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
+        <init-param>
+            <param-name>application</param-name>
+            <param-value>com.BasixAdminApp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>widgetset</param-name>
+            <param-value>org.basix.BasixWidgetWidgetset</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminApplication</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>

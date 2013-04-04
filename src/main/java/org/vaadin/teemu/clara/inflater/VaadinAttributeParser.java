@@ -7,8 +7,8 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Layout.MarginInfo;
 
 /**
- * {@link org.vaadin.teemu.clara.inflater.AttributeParser} that parses Vaadin specific types (like
- * {@link com.vaadin.ui.Layout.MarginInfo} for example).
+ * {@link AttributeParser} that parses Vaadin specific types (like
+ * {@link MarginInfo} for example).
  */
 public class VaadinAttributeParser implements AttributeParser {
 

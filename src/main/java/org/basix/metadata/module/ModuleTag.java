@@ -12,6 +12,8 @@ public class ModuleTag {
 
     private String caption;
     private String pack;
+    private String role;
+
     private List<FunctionTag> functionTags = new ArrayList<FunctionTag>();
 
     public ModuleTag(String caption, String pack) {
@@ -39,5 +41,11 @@ public class ModuleTag {
         return functionTags;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

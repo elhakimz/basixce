@@ -3,7 +3,7 @@ package org.vaadin.teemu.clara.inflater;
 public interface AttributeParser {
 
     /**
-     * Returns {@code true} if this {@link org.vaadin.teemu.clara.inflater.AttributeParser} can parse a
+     * Returns {@code true} if this {@link AttributeParser} can parse a
      * {@link String} to an instance of the given {@code valueType}.
      * 
      * @param valueType

@@ -1,4 +1,6 @@
+import com.AppFacade
 import com.BasixApp
+import com.vaadin.Application
 import com.vaadin.ui.Component
 import com.vaadin.ui.HorizontalSplitPanel
 import com.vaadin.ui.TabSheet
@@ -14,13 +16,13 @@ import org.vaadin.teemu.clara.binder.annotation.UiField
 
 parameters = [:]
 
-def controller = new EditorController("modules/webtools/EditorUI.xml");
+def controller = new EditorController("modules/webtools/EditorUI.xml", null );
 output = controller.view;
 
 
 class EditorController extends BaseController {
 
-    private DirectoryTree tree = new DirectoryTree(BasixApp.baseDirectory + "/scripts")
+    private DirectoryTree tree
 
     @UiField("split")
     private HorizontalSplitPanel split;
@@ -29,8 +31,9 @@ class EditorController extends BaseController {
 
     private TabSheet tabSheet = new TabSheet()
 
-    EditorController(String xmlView) {
+    EditorController(String xmlView, Application app) {
         super(xmlView)
+        tree = new DirectoryTree(AppFacade.instance.baseDirectory+"/scripts")
         initEditor()
 
     }
@@ -39,6 +42,7 @@ class EditorController extends BaseController {
         split.firstComponent = tree
         split.secondComponent = tabSheet
         tabSheet.setSizeFull()
+        tabSheet.setImmediate(true)
         tabSheet.addStyleName(Reindeer.TABSHEET_SMALL)
         tree.setSizeFull()
         split.setSplitPosition(20)
@@ -50,14 +54,31 @@ class EditorController extends BaseController {
             }
         }
 
+        tabSheet.closeHandler = new TabSheet.CloseHandler() {
+            @Override
+            public void onTabClose(TabSheet tabsheet, Component tabContent) {
+                onTabCloseHandler(tabContent);
+            }
+        };
+
+
+        tabSheet.addListener(new TabSheet.SelectedTabChangeListener() {
+            @Override
+            public void selectedTabChange(TabSheet.SelectedTabChangeEvent event) {
+                TabSheet tabsheet = event.getTabSheet();
+                Component cmp=tabsheet.selectedTab
+                if (cmp != null) {
+                    currentFile =  ((AceEditor)cmp).data
+                }
+            }
+        });
+
     }
 
     /**
      * load new document
      */
     private void loadNewDoc(String sDocFile) {
-
-
 
         currentFile = sDocFile;
 
@@ -94,11 +115,24 @@ class EditorController extends BaseController {
         editor.data = currentFile
         editor.setValue(value);
         editor.setSizeFull();
-        TabSheet.Tab tab = tabSheet.addTab(editor, title);
-        tab.setClosable(true);
-        tab.setDescription(sDocFile);
-        tabSheet.setSelectedTab(tab);
 
+        TabSheet.Tab tab = tabSheet.addTab(editor, title);
+        tab.setClosable(true)
+        tab.description=currentFile
+        tabSheet.setSelectedTab(tab)
+
+    }
+
+
+
+    private void onTabCloseHandler(final Component tabContent){
+        println "closing tabContent "
+        try {
+            TabSheet.Tab tab = tabSheet.getTab(tabContent)
+            tabSheet.removeTab(tab)
+        } catch (e) {
+
+        }
 
     }
 

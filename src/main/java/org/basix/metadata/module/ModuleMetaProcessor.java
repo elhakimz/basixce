@@ -68,6 +68,7 @@ public class ModuleMetaProcessor implements Serializable {
 
             if(qname.equalsIgnoreCase("module")){
               currentModule = new ModuleTag(attributes.getValue("caption"),attributes.getValue("package"));
+              currentModule.setRole(attributes.getValue("role"));
               moduleTags.add(currentModule);
 
             }else if(qname.equalsIgnoreCase("function")){
