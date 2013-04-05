@@ -27,6 +27,6 @@ Apache 2.0
 
 SCREENSHOTS
 -----------
-<img src=""/>
+<img src="https://raw.github.com/elhakimz/basixce/master/web/images/shots/shot1.jpg"/>
 <br/>
-<img src=""/>
+<img src="https://raw.github.com/elhakimz/basixce/master/web/images/shots/shot2.jpg"/>
