@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VerticalLayout sizeFull="true" height="100%" xmlns:l="urn:vaadin:layout" >
+    <CssLayout styleName="toolbar small" width="100%">
+        <Button id="btnRun" caption="Run" />
+    </CssLayout>
+    <VerticalSplitPanel id="split" sizeFull="" height="550px" l:expandRatio="1.0">
+
+
+    </VerticalSplitPanel>
+</VerticalLayout>

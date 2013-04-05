@@ -1,0 +1,15 @@
+<VerticalLayout sizeFull="" height="100%" width="100%" spacing="true" xmlns:l="urn:vaadin:layout" >
+
+    <HorizontalLayout  spacing="true">
+       <Label caption="Business Corp"  id="brand"/>
+       <HorizontalLayout id="toolbar" />
+    </HorizontalLayout>
+
+    <HorizontalLayout id="mainPanel" sizeFull=""  height="100%" l:expandRatio="1.0">
+        <VerticalLayout id="menu" styleName="menu" width="250px">
+        </VerticalLayout>
+        <TabSheet id="tabSheet" sizeFull="" width="800px" height="100%" l:expandRatio="1.0" >
+            <VerticalLayout caption="Dashboard" id="dash"/>
+        </TabSheet>
+    </HorizontalLayout>
+</VerticalLayout>
