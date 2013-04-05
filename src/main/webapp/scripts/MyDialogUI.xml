@@ -1,4 +1,0 @@
-<VerticalLayout margin="true" visible="true" >
-      <Label id="label" caption="Hello World" />
-      <Button id="button" caption="Okay"/>
-</VerticalLayout>
